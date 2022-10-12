@@ -6,13 +6,11 @@
 		/*This function is used for connecting mysql database*/	
 		function connectMysql()
 		{
-			/*$db_host= "localhost";
+			$db_host= "localhost";
 			$db_username="root";
-			$db_password="";*/
+			$db_password="";
 			
-				$db_host= "50.62.209.48:3306";
-			$db_username="chorapalli4u";
-			$db_password="fXi0_1k3";
+			
 			
 			$db_name="blooddonors";
 			$this->link= mysql_connect($db_host, $db_username, $db_password,false);
