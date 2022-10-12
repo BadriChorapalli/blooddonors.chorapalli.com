@@ -1,7 +1,7 @@
 <?php
 //Please Enter Your Details
-$user="muthugtti"; //your username
-$password="muthu123"; //your password
+$user=""; //your username
+$password=""; //your password
 $mobilenumbers=$_REQUEST['mobile'];; //enter Mobile numbers comma seperated
 $message = $_REQUEST['message'];; //enter Your Message
 //$message = "Dear Member,Your One Time Password is ".$random_number." Please use this for mobile verification.-Blood Donors";
