@@ -1,0 +1,477 @@
+
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+
+
+<script src="js/jquery.min.js"></script>
+  <script type="text/javascript">
+      window.onload = function () {
+          var chart = new CanvasJS.Chart("chartContainer", {
+              theme: "theme1",//theme1
+              title:{
+                 // text: "Users Registered "              
+             },
+              data: [              
+              {
+// Change type to "bar", "splineArea", "area", "spline", "pie",etc.
+                  type: "column",
+                  dataPoints: [
+                  { label: "O+", y: 10 },
+                  { label: "O-", y: 15 },
+                  { label: "A+", y: 25 },
+                  { label: "A-", y: 30 },
+                  { label: "B+", y: 28 },
+				  { label: "B-", y: 10 },
+                  { label: "AB+", y: 24 },
+				  { label: "AB-", y: 18 }
+                  ]
+              }
+              ]
+          });
+
+          chart.render();
+      }
+  </script>
+  <link type="text/css" rel="stylesheet" href="chorapalli.css">
+  <script type="text/javascript" src="js/canvasjs.js"></script>
+   <script type="text/javascript" src="js/angular.min.js"></script>
+  <script type="text/javascript" src="js/ngtranslate.js"></script>
+<script type="text/javascript" src="js/label.js"></script>
+
+
+
+<script>
+$(document).ready(function(){
+	$( "#home" ).click(function() {
+				$(".forms").hide();
+				$(".homePage").show();
+	});
+	$( "#registration" ).click(function() {
+				$("#formType").val("registration");
+				$(".forms,.homePage").hide();
+				$("#mobileVerification").show();
+	  });
+	$( "#requestLink" ).click(function() {
+				$("#formType").val("requestLink");
+				$(".forms,.homePage").hide();
+				$("#mobileVerification").show();
+	});
+	
+	$( "#feedbackLink" ).click(function() {
+				$(".forms,.homePage").hide();
+				$("#feedbackForm").show();
+	});
+
+	
+
+
+	$( "#sendMblNum" ).click(function() {
+			
+				var formURL="php/mobileverification.php";
+				var postData=$("#mobileVerify").serialize()+"&reqType="+$("#formType").val();
+				var condition=null;
+				if($("#mobile").val()!=""){
+			   $.ajax(
+					{
+						url : formURL,
+						type: "POST",
+						data : postData,
+						success:function(data, textStatus, jqXHR) 
+						{
+						$(".forms").hide();
+			            $("#oneTimePassword").show();
+						console.log(data);
+							if(eval(data)){
+								
+								}else{
+								
+								}
+						},
+						error: function(jqXHR, textStatus, errorThrown) 
+						{
+							conValue=false;
+							$(".forms").hide();
+			                $("#mobileVerification").show( );
+							//if fails      
+						}
+					});
+				 }else{
+				 alert("Please enter Mobile no");
+				
+				 }
+				
+			
+	});
+	$( "#verify" ).click(function() {
+			   
+				 var formURL="php/OTPVerification.php";
+				var postData=$("#OTPForm").serialize()+"&reqType="+$("#formType").val()+"&session="+$("#session").val();
+				if($("#otp").val()!=""){
+			      $.ajax(
+					{
+						url : formURL,
+						type: "POST",
+						data : postData,
+						success:function(data, textStatus, jqXHR) 
+						{ console.log(data)
+								if(eval(data.split(':')[1])){
+								$("#regnumber").val(data.split(':')[0]);
+											$(".forms").hide();
+											if($("#formType").val()=="registration"){
+											 $("#registrationForm").show( );
+											 }else{
+											 $("#requestForm").show( );
+											 }
+								 }
+			               
+						},
+						error: function(jqXHR, textStatus, errorThrown) 
+						{
+							conValue=false;
+							$(".forms").hide();
+			                 $("#oneTimePassword").show( );
+							//if fails      
+						}
+					});
+					}else{
+					alert("please enter OTP the value")
+					}
+
+				
+			  
+	});
+	$("#regSub").click(function(){
+		        var formURL="php/registration.php";
+				var postData=$("#regForm").serialize()+"&reqType="+$("#formType").val()+"&session="+$("#session").val();
+				console.log(postData);
+			  $.ajax(
+					{
+						url : formURL,
+						type: "POST",
+						data : postData,
+						success:function(data, textStatus, jqXHR) 
+						{
+							alert(data)
+								//$(".forms").hide();
+								$("#registrationForm").hide();
+								$("#successForm").show();
+								
+			               
+						},
+						error: function(jqXHR, textStatus, errorThrown) 
+						{
+							conValue=false;
+							$(".forms").hide();
+			                 $("#oneTimePassword").show( );
+							//if fails      
+						}
+					});
+	});
+	$("#rgo").click(function(){
+	if($("#requestOption").val()=="reg"){
+	$("#formType").val("registration");
+				$(".forms,.homePage").hide();
+				$("#mobileVerification").show();
+	}else{
+	
+	$("#formType").val("requestLink");
+				$(".forms,.homePage").hide();
+				$("#mobileVerification").show();
+	}
+	
+	});
+$("#feedbackgo").click(function(){
+	if($("#feedbackOpt").val()=="Feedback"){
+	$("#formType").val("feedback");
+				$(".forms,.homePage").hide();
+				$("#feedbackForm").show();
+	}else{
+	
+	$("#formType").val("requestLink");
+			$(".forms,.homePage").hide();
+				$("#feedbackForm").show();
+	}
+	
+	});
+
+});
+
+</script> 
+<style>
+
+</style>
+
+</head>
+<body topmargin="0">
+<div ng-app="myApp" ng-controller="ctrl" style="" class="mainDiv" >
+<input type="hidden" id="formType" name="formType" value=""/>
+<input type="hidden" id="session" id="session" value=""/>
+<div style="width:100%;position:absolute;" id="div1" class="slide">
+
+</div>
+<div class="title" style="">{{ 'T_BLD' | translate }} <span>{{ 'T_DNRS' | translate }}</span></div>
+<div class="menu">
+
+<ul>
+  <li><a href="#" id="home">{{ 'M_HM' | translate }}</a></li>
+<!--   <li><a href="#" id="registration">{{ 'M_RGSTRTN' | translate }}</a></li>
+  <li><a href="#" id="requestLink">{{ 'M_REQ' | translate }}</a></li>
+  <li><a href="#" id="feedbackLink">{{ 'M_FEED' | translate }}</a></li>
+  <li><select ng-options="language.name | translate for language in languages " ng-model="item" ng-change="update()"></select></li> -->
+ </ul>
+</div>
+<div class="" style="display:none">
+
+<div class="hpH1">{{ 'H_Title1' | translate }} <br>   <span> {{ 'H_Title2' | translate }} </span></div>
+
+</div>
+<div class="homePage" style="margin-left: auto;margin-right: auto;width:900px;display: non;" id="hPage">
+<div style="width:300px;float:left">
+<form action="" method="post" class="chorapalli-form"  style="width:300px;">
+    <h1>I'm Interested In..
+       
+    </h1>
+    <label>
+             <select name="requestOption" id="requestOption">
+		
+		 <option value="reg">Donnor Registration</option>
+        <option value="req">Request for Blood</option>
+      
+        </select><input type="button" class="button" value="Go" id="rgo"  /> 
+    </label>
+    
+    
+      
+</form>
+
+</div>
+<div id="statistics" class="statistics" style="width:500px">
+ <div id="chartContainer" style="height: 300px; width: 100%;">
+  </div>
+
+</div>
+<div style="width:280px;float:left;margin-top: -140px;">
+<form action="" method="post" class="chorapalli-form"  style="width:300px;">
+    <h1>Feedback/Suggestion
+       
+    </h1>
+    <label>
+             <select name="requestOption" id="feedbackOpt">
+		
+		 <option value="feedback">Feedback</option>
+        <option value="suggestion">Suggestion</option>
+      
+        </select><input type="button" class="button" value="Go" id="feedbackgo" /> 
+    </label>
+    
+    
+      
+</form>
+
+</div>
+<div class="sentence">
+"Do you feel you don’t have much to offer? You have the most precious resource of all: the ability to save a life by donating blood! Help share this invaluable gift with someone in need"
+</div>
+</div>
+<div class="forms" style="display:none;" id="mobileVerification" name="">
+<form action="" method="post" class="chorapalli-form"  name="mobileVerify" id="mobileVerify">
+        <h1>Mobile Verification
+        <span>To verify your mobile number, you need a One Time Password. Please fill the mobile number and click "Send"</span>
+    </h1>
+    <label>
+             <input id="mobile" type="text" name="mobile" placeholder="Mobile Number" required/><input type="button" class="button" value="Send"  id="sendMblNum"/> 
+		
+    </label>
+     
+</form>
+</div>
+
+<div class="forms" style="display:none" id="oneTimePassword">
+<form action="" method="post" class="chorapalli-form" id="OTPForm">
+    <h1>One Time Password
+        <span>Please enter the 6 digit OTP sent to your registered mobile number to initiate the registration process</span>
+    </h1>
+    <label>
+             <input id="otp" type="text" name="otp" placeholder="One Time Password" required  /><input type="button" class="button" value="Verify" id="verify" /> 
+    </label>
+    
+    
+      
+</form>
+</div>
+	
+<div class="forms" style="display:none;" id="registrationForm">
+<form action="" method="post" class="chorapalli-form" id="regForm" name="regform">
+    <h1>{{ 'M_RGSTRTN' | translate }} Form
+        <span>Please fill all the texts in the fields.</span>
+
+    </h1>
+
+
+    <label>
+        <span> Name :</span>
+        <input id="name" type="text" name="name" placeholder="Your  Name" />
+    </label>
+     <label>
+        <span> Gender :</span>
+       <select name="gender">
+		 <option value="">Select Gender</option>
+          <option value="male">Male</option>
+		   <option value="female">Female</option>
+		</select>
+    </label>
+    <label>
+        <span> Number  :</span>
+        <input id="regnumber" type="text" name="number"  disabled />
+    </label>
+      <label>
+        <span> Age ({{age}}):</span>
+        <input id="age" type="range" name="age" placeholder="Age" ng-model="age" style="background:rgba(0, 92, 255, 0.55)" min="18" max="60" value="18" />
+    </label>
+    
+    <label>
+        <span> Weight ({{weight}}) :</span>
+        <input id="weight" type="range"  name="weight" placeholder="Weight" ng-model="weight" style="background:rgba(0, 92, 255, 0.55)"  min="50" max="90" value="18" />
+    </label>
+    <label>
+        <span> Street  :</span>
+       <input id="street" type="text" name="street" placeholder="Your Street" />
+    </label> 
+	  <label>
+        <span> City  :</span>
+       <input id="city" type="text" name="city" placeholder="Your Street" />
+      </label>
+	   <label>
+        <span> Pin Code  :</span>
+       <input id="pincode" type="text" name="pincode" placeholder="Your pincode" ng-model="pin-code" required/>
+	     </label>
+     <label>
+        <span>Blood Group  :</span><select name="bloodgroup">
+		 <option value="0">Select Group</option>
+        <option value="O+">O +</option>
+        <option value="O-">O -</option>
+		<option value="A+">A +</option>
+		<option value="A-">A -</option>
+		<option value="B+">B +</option>
+        <option value="B-">B -</option>
+		<option value="AB+">AB +</option>
+		<option value="AB-">AB -</option>
+        </select>
+    </label>    
+	<label>
+        <span>Last donated blood :</span><input id="ldb" type="date" name="ldb"  style="width:350px" />
+    </label>    
+     <label id="regControl">
+        <span>&nbsp;</span> 
+        <input type="button" class="button" value="Submit"  id="regSub"/> <input type="reset" class="button" value="Clear"  id="regSub"/> 
+    </label>    
+	 <label >
+	  <span>&nbsp;</span> 
+       
+        
+    </label>
+</form>
+
+</div>
+<div class="forms" style="display:none" id="requestForm">
+
+<form action="" method="post" class="chorapalli-form">
+    <h1>Request For Blood
+        <span>Please fill all the texts in the fields.</span>
+    </h1>
+    <label>
+        <span>Name :</span>
+        <input id="name" type="text" name="name" placeholder="Your Full Name" />
+    </label>
+     <label>
+        <span>Blood Group  :</span><select name="selection">
+		 <option value="0">Select Group</option>
+        <option value="O+">O +</option>
+        <option value="O-">O -</option>
+		<option value="A+">A +</option>
+		<option value="A-">A -</option>
+		<option value="B+">B +</option>
+        <option value="B-">B -</option>
+		<option value="AB+">AB +</option>
+		<option value="AB-">AB -</option>
+        </select>
+    </label>  
+	 <label>
+        <span> Hospital  :</span>
+       <input id="hospital" type="text" name="hospital" placeholder="Hospital Name" />
+      </label>
+	   <label>
+        <span> Location  :</span>
+       <input id="location" type="text" name="location" placeholder="Blood required location" />
+      </label>
+    <label>
+        <span> Pin Code  :</span>
+       <input id="pincode" type="text" name="pincode" placeholder="Pin Code" />
+      </label>
+    
+    <label>
+        <span>Message to donors  :</span>
+        <textarea id="message" name="message" placeholder="Your Message to Us"></textarea>
+    </label> 
+	<label>
+        <span> Email ID   :</span>
+       <input id="emailId" type="email" name="emailId" placeholder="Email Id" />
+      </label>
+	  <label>
+        <span> Units needed  :</span>
+       <input id="unitsNeeded" type="text" name="unitsNeeded" placeholder="Units needed" />
+      </label>
+	  <label>
+        <span> Required date  :</span>
+       <input id="pincode" type="date" name="requiredDate"  />
+      </label>
+        
+     <label>
+        <span>&nbsp;</span> 
+        <input type="button" class="button" value="Submit" id="reqSubmit" /> <input type="reset" class="button" value="Clear" /> 
+    </label>    
+</form>
+</div>
+
+<div class="forms" style="display:none" id="feedbackForm">
+<form action="" method="post" class="chorapalli-form">
+    <h1>{{ 'M_FEED' | translate }} 
+        <span>Please give your valuable feedback</span>
+    </h1>
+    <label>
+        <span> Name :</span>
+        <input id="name" type="text" name="name" placeholder="Your Full Name" />
+    </label>
+    
+    <label>
+        <span> Email :</span>
+        <input id="email" type="email" name="email" placeholder="Valid Email Address" />
+    </label>
+    
+    <label>
+        <span>{{ 'M_FEED' | translate }} :</span>
+        <textarea id="message" name="message" placeholder="Your Message to Us"></textarea>
+    </label> 
+       
+     <label>
+        <span>&nbsp;</span> 
+        <input type="button" class="button" value="Send"  id="feedbackSub"/>  <input type="reset" class="button" value="Clear" /> 
+    </label>    
+</form>
+</div>
+<div class="forms" style="display:none" id="successForm">
+<form action="" method="post" class="chorapalli-form" >
+    <h1>Your  registration  Submited Success  
+       
+    </h1>
+   <label>
+       <br>&nbsp;&nbsp;&nbsp;Wait we are redirecting to home page
+    </label>
+    
+        
+</form>
+</div>
+</div>
+</body>
+</html>

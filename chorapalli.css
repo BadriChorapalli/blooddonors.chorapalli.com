@@ -1,0 +1,227 @@
+body{
+margin:0px;
+background-size:100%;
+background-repeat:no-repeat;
+font:400 1em/1.6 proxima-nova,sans-serif
+}
+.menu{
+width:100%;
+height:80px;
+background-color: rgba(0, 0, 0, 0.25); 
+z-index:1;
+
+}
+.menu ul {
+
+    list-style-type: none;
+    padding-right: 0;
+    overflow: hidden;
+	float:right;
+	margin-right:50px;
+	margin-top:0px;
+}
+
+.menu li {
+    float: left;
+
+}
+
+
+.menu a {
+    display: block;
+    width: 100px;
+    color:white;
+	text-decoration:none;
+	padding:28px;
+	
+	font-size:15px;
+	font-weight:600;
+text-shadow: 2px 2px rgba(22, 20, 20, 0.35);
+}
+
+.menu select {
+    display: block;
+    width: 100px;
+    
+	text-decoration:none;
+	margin:28px;
+	
+	font-size:15px;
+	font-weight:600;
+
+}
+.menu a:hover{
+color:rgb(9, 168, 243);
+/*background-color:rgba(252, 244, 244, 0.44);*/
+text-shadow: 2px 2px rgba(22, 20, 20, 0.35);
+}
+.menu a select{
+width:80px;
+}
+#div1{
+background:url(images/start.jpg);
+height:741px;
+background-size:100%;
+background-repeat:no-repeat;
+width:100%;
+
+}
+
+.slide{
+z-index:-10;
+background-size:100%;
+background-repeat:no-repeat;
+}
+/* Chorapalli Form Style */
+
+.chorapalli-form {
+    margin-left:auto;
+    margin-right:auto;
+ 
+    max-width: 500px;
+    background-color: rgba(228, 241, 250, 0.36) ;
+    padding: 20px 20px 20px 20px;
+    font-size:12px;
+    color: #666;
+	box-shadow: 10px 10px 5px rgba(3, 3, 3, 0.19);
+}
+.chorapalli-form h1 {
+    font: 24px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    padding: 10px 10px 10px 20px;
+    display: block;
+	background-color: rgba(253, 255, 254, 0.6);
+    border-bottom: 1px solid #C3CAD1;
+    margin: -20px -20px 15px;
+	white-space: nowrap;
+}
+.chorapalli-form h1>span {
+    display: block;
+    font-size: 11px;
+	white-space: normal;
+}
+
+.chorapalli-form label>span {
+    float: left;
+    margin-top: 10px;
+    color: #5E5E5E;
+}
+.chorapalli-form label {
+    display: block;
+    margin: 0px 0px 5px;
+}
+.chorapalli-form label>span {
+    float: left;
+    width: 20%;
+    text-align: right;
+    padding-right: 15px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.chorapalli-form input[type="date"],.chorapalli-form input[type="text"], .chorapalli-form input[type="email"], .chorapalli-form textarea, .chorapalli-form select,.chorapalli-form input[type="number"],.chorapalli-form input[type="range"] {
+    color: #888;
+    width: 70%;
+    padding: 0px 0px 0px 5px;
+    border: 1px solid #C3CAD1;
+    background: #FBFBFB;
+    outline: 0;
+    -webkit-box-shadow:inset 0px 1px 6px #ECF3F5;
+    box-shadow: inset 0px 1px 6px #ECF3F5;
+    font: 200 12px/25px Arial, Helvetica, sans-serif;
+    height: 30px;
+    line-height:15px;
+    margin: 2px 6px 16px 0px;
+}
+.chorapalli-form textarea{
+    height:100px;
+    padding: 5px 0px 0px 5px;
+    width: 70%;
+}
+.chorapalli-form select {
+    background: #fbfbfb url('images/down-arrow.png') no-repeat right;
+    background: #fbfbfb url('images/down-arrow.png') no-repeat right;
+   appearance:none;
+    -webkit-appearance:none; 
+   -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    width: 70%;
+}
+.chorapalli-form .button{
+    padding: 10px 30px 10px 30px;
+    background: #66C1E4;
+    border: none;
+    color: #FFF;
+    box-shadow: 1px 1px 1px #4C6E91;
+    -webkit-box-shadow: 1px 1px 1px #4C6E91;
+    -moz-box-shadow: 1px 1px 1px #4C6E91;
+    text-shadow: 1px 1px 1px #5079A3;
+    
+}
+.chorapalli-form .button:hover{
+    background: #3EB1DD;
+}
+
+
+/*home page styles*/
+.title{
+  width:auto;
+  position:absolute;height:80px;
+  margin-left:40px;
+  padding-top:10px;
+  font: 44px "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-weight:bold;
+  text-shadow: 2px 2px rgba(22, 20, 20, 0.35);
+  color:rgba(255, 0, 0, 0.77);
+}
+.title span{
+color:rgba(9, 204, 9, 0.66);
+}
+
+.hpH1{
+  font: 84px proxima-nova,sans-serif;
+  font-weight:bold;
+  color:rgba(226, 10, 122, 0.78);
+  float:right;
+ text-shadow: 2px 2px rgba(15, 15, 15, 0.41);
+ height:200px;
+
+
+}
+.statistics{
+width:490px;
+float:left;
+
+ height:300px;
+ background:rgba(58, 126, 92, 0);
+box-shadow: rgba(3, 3, 3, 0.188235) 10px 10px 5px 0px;
+
+margin-left:50px;
+color:red;
+}
+.hpH1 span{margin-left:180px;color:green}
+.sentence{
+width:810px;
+background:rgba(250, 244, 244, 0.66);
+box-shadow: rgba(3, 3, 3, 0.188235) 10px 10px 5px 0px;
+font: 44px "Trebuchet MS", Arial, Helvetica, sans-serif;
+
+padding:20px;
+font-size: 16px;
+height:150px;
+color: rgb(102, 102, 102);
+float:left;
+}
+ .canvasjs-chart-canvas{
+background: rgba(58, 126, 92, 0);
+
+}
+.thanksNotes{
+display:none;
+font: 44px "Trebuchet MS", Arial, Helvetica, sans-serif;
+width:100%;
+text-align:center;
+font-size:18px;
+font-weight:600;
+color:rgb(0, 82, 255);
+}
+.thanksNotes a{text-decoration:none}
